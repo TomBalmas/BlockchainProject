@@ -13,7 +13,7 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
  extended: true})); 
-app.use(cors())
+app.use(cors());
 
 //Start your server on a specified port
 app.listen(port, ()=>{
@@ -24,9 +24,9 @@ app.listen(port, ()=>{
 app.post('/login', (req, res) =>{
     var mail = req.body.email.toLowerCase()
     var pass = req.body.password
-    dbCon.login(mail, pass, res)
-    console.log(req.body.email) 
-    console.log(req.body.password) 
+    dbCon.login(mail, pass, res);
+    console.log(req.body.email);
+    console.log(req.body.password);
 })
 
 //Route that handles signup logic
