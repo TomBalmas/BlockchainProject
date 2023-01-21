@@ -1,10 +1,10 @@
 import axios from 'axios';
 const dogecore = require('dogecore-lib');
-const walletReducer = require('./walletBTC')
+const walletBTC = require('./walletBTC')
 
 // Derive an HD wallet for Dogecoin using BIP44
 const dogecoinHdPath = "m/44'/3'/0'";
-const dogecoinHdWallet = walletReducer.masterHdWallet.derive(dogecoinHdPath);
+const dogecoinHdWallet = walletBTC.masterHdWallet.derive(dogecoinHdPath);
 const dogecoinPubKey = dogecore.PublicKey.fromBuffer(dogecoinHdWallet.publicKey);
 export const dogecoinAddress = dogecore.Address.fromPublicKey(dogecoinPubKey,dogecore.Networks.livenet).toString();
 const privateKey = new dogecore.PrivateKey.fromWIF(dogecore.PrivateKey.fromBuffer(dogecoinHdWallet.privateKey).toString());

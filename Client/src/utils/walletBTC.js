@@ -24,4 +24,23 @@ export async function checkBalance() {
 }
 
 
+export async function sendBTC(destAddress,amount) { 
+
+    const network = bitcoin.networks.testnet;
+    const transaction = new bitcoin.TransactionBuilder(network);
+    const keyPair = bitcoin.ECPair.fromWIF(bitcoinHdWallet.privateKey, network);
+
+    // Add input (UTXO) to the transaction
+    //transaction.addInput(txid, vout)
+    // Add output to the transaction
+    transaction.addOutput(destAddress, amount);
+    // Sign the input of the transaction
+    transaction.sign(0, keyPair);
+    // Serialize and broadcast the transaction to the network
+    const tx = transaction.build();
+    const txHex = tx.toHex();
+    return transaction;
+}
+
+
 console.log(`Bitcoin address: ${bitcoinAddress}`);
