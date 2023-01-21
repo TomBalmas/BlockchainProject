@@ -1,5 +1,8 @@
 import * as Acc from './walletEthers.js'
 
+
+
+
 const initError = {
     er: false,
     tp: '',
@@ -12,6 +15,7 @@ const initTransaction = {
     recepient: '',
     amount: 0
 }
+
 
 export const initState = {
     page: 'home',   // new, created, dashboard, transaction, confirm, password
@@ -155,5 +159,6 @@ export const reducer = (state, action) => {
         default:
             console.log(state)
             return state
+           
     }
 }

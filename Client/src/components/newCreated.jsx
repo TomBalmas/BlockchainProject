@@ -3,8 +3,10 @@ import RowItemSingle from './rowItemSingle'
 import PageContent from './pageContent'
 import UserContext from '../utils/walletContext.js'
 
+
 export default function NewCreated() {
     const { state,dispatch } = useContext(UserContext)
+    
     return (
         <PageContent title="New account is created!">
             <RowItemSingle>
