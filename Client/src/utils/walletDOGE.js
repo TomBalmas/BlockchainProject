@@ -17,7 +17,19 @@ export function sendDoge(toAddress,amount){
 
 }
 
-export async function checkBalance() { 
+
+export async function checkDODGEPrice() {
+    try {
+        const response = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd');
+        const price = response.data.dogecoin.usd;
+        console.log(price);
+        return price;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function checkDOGEBalance() { 
     var bal;
     const response = await axios.get('https://dogechain.info//api/v1/address/balance/' + dogecoinAddress);
     const res = response.data;

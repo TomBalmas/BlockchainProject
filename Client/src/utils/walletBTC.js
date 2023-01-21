@@ -12,6 +12,17 @@ const bitcoinPubKey = bitcoinHdWallet.publicKey;
 export const bitcoinAddress = bitcoin.payments.p2pkh({ pubkey: bitcoinPubKey }).address;
 
 
+export async function checkBTCPrice() {
+    try {
+        const response = await axios.get('https://coincap.io/page/BTC');
+        const price = response.data.price;
+        console.log(price);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 export async function checkBalance() { 
     var bal;
     const response = await axios.get(`https://blockchain.info/balance?active=${bitcoinAddress}`);
