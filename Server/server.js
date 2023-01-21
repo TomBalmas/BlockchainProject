@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const crypto = require('crypto');
 const bitcoin = require('bitcoinjs-lib');
-const port = 3000
+const port = 3001
 
 const dbCon = require('./databaseConnection');
 

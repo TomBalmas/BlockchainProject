@@ -1,6 +1,38 @@
 import { ethers } from "ethers"
 import encryptpwd from "encrypt-with-password"
 
+const crypto = require('crypto');
+const seed = crypto.randomBytes(32);
+const hdkey = require('hdkey');
+const bitcoin = require('bitcoinjs-lib');
+const EthereumBip44 = require('ethereum-bip44');
+const dogecore = require('dogecore-lib');
+//import * as ecc from 'tiny-secp256k1';
+// const ECPair = ECPairFactory(ecc);
+// const keyPair = ECPair.fromWIF(seed);
+
+// Generate a new master HD wallet
+const masterSeed = seed;
+const masterHdWallet = hdkey.fromMasterSeed(masterSeed);
+var wallet = new EthereumBip44(seed);
+// Derive an HD wallet for Bitcoin using BIP44
+const bitcoinHdPath = "m/44'/0'/0'";
+const bitcoinHdWallet = masterHdWallet.derive(bitcoinHdPath);
+const bitcoinPubKey = bitcoinHdWallet.publicKey;
+const bitcoinAddress = bitcoin.payments.p2pkh({ pubkey: bitcoinPubKey }).address;
+
+console.log(`Bitcoin address: ${bitcoinAddress}`);
+
+
+// Derive an HD wallet for Dogecoin using BIP44
+const dogecoinHdPath = "m/44'/3'/0'";
+const dogecoinHdWallet = masterHdWallet.derive(dogecoinHdPath);
+const dogecoinPubKey = dogecore.PublicKey.fromBuffer(dogecoinHdWallet.publicKey);
+const dogecoinAddress = dogecore.Address.fromPublicKey(dogecoinPubKey,dogecore.Networks.livenet).toString();
+
+console.log(`Dogecoin address: ${dogecoinAddress}`)
+
+
 // create new account
 export const createNewWallet = () => {
     return ethers.Wallet.createRandom()
@@ -38,6 +70,7 @@ export const getBalance = async (address, network) => {
     // convert a currency unit from wei to ether
     return ethers.utils.formatEther(balance) // wee to ether
 }
+
 
 // sign and send signed transaction
 export const sendTransaction = async (network, privatekey, recepient, value) => {

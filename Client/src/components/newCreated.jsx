@@ -22,7 +22,7 @@ export default function NewCreated() {
 
             <RowItemSingle cl="mt-10">
                 <button className='button' onClick={() => dispatch({ type: 'PAGE', param: 'dashboard' })}>Dashboard</button>
-                <div>Warning: <span className='text-danger'>save the mnemonic phrase before close!</span></div>
+                <div>Warning: <span className='text-danger'>save the mnemonic phrase before closing!</span></div>
             </RowItemSingle>
         </PageContent>
     )
