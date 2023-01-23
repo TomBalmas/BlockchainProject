@@ -88,7 +88,7 @@ export default function Dashboard() {
                 {/* <div className="float-left">USD</div> */}
             </RowItemSingle>
             <RowItemSingle cl="mt-10">
-                <button className='button mr-10' onClick={() => dispatch({ type: 'PAGE', param: 'transaction' })}>New Transaction</button>
+                <button className='button mr-10' onClick={() => dispatch({ type: 'PAGE', param: 'ETCtransaction' })}>New Transaction</button>
                 <button className='button' onClick={() => dispatch({ type: 'PAGE', param: 'home' })}>Exit Wallet</button>
                 <span className='text-danger ml-20'>{state.error.msg}</span>
             </RowItemSingle>
@@ -126,7 +126,7 @@ export default function Dashboard() {
                 {/* <div className="float-left">USD</div> */}
             </RowItemSingle>
             <RowItemSingle cl="mt-10">
-                <button className='button mr-10' onClick={() => dispatch({ type: 'PAGE', param: 'transaction' })}>New Transaction</button>
+                <button className='button mr-10' onClick={() => dispatch({ type: 'PAGE', param: 'BTCtransaction' })}>New Transaction</button>
                 <button className='button' onClick={() => dispatch({ type: 'PAGE', param: 'home' })}>Exit Wallet</button>
                 <span className='text-danger ml-20'>{state.error.msg}</span>
             </RowItemSingle>
@@ -135,7 +135,7 @@ export default function Dashboard() {
                 <Transactions />
             </RowItemSingle>
             <RowItemSingle>
-                <div><a href={Lib.etherscanUrlAcc(state.network, state.address)}
+                <div><a href={Lib.btcscanUrlAcc( bitcoinAddress)}
                     rel="noopener noreferrer" target='_blank'>See the account in block explorer</a></div>
             </RowItemSingle>
             <div class="header">
@@ -167,7 +167,7 @@ export default function Dashboard() {
                 {/* <div className="float-left">USD</div> */}
             </RowItemSingle>
             <RowItemSingle cl="mt-10">
-                <button className='button mr-10' onClick={() => dispatch({ type: 'PAGE', param: 'transaction' })}>New Transaction</button>
+                <button className='button mr-10' onClick={() => dispatch({ type: 'PAGE', param: 'DOGEtransaction' })}>New Transaction</button>
                 <button className='button' onClick={() => dispatch({ type: 'PAGE', param: 'home' })}>Exit Wallet</button>
                 <span className='text-danger ml-20'>{state.error.msg}</span>
             </RowItemSingle>
@@ -176,7 +176,7 @@ export default function Dashboard() {
                 <Transactions />
             </RowItemSingle>
             <RowItemSingle>
-                <div><a href={Lib.etherscanUrlAcc(state.network, state.address)}
+                <div><a href={Lib.dogescanUrlAcc(dogecoinAddress)}
                     rel="noopener noreferrer" target='_blank'>See the account in block explorer</a></div>
             </RowItemSingle>
         </PageContent>

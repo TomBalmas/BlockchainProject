@@ -9,6 +9,16 @@ export const etherscanUrlAcc = (network,hash) => {
     return `https://${network}.etherscan.io/address/${hash}`
 }
 
+export const btcscanUrlAcc = (hash) => {
+    return `https://www.blockchain.com/explorer/search?search=${hash}`
+}
+
+export const dogescanUrlAcc = (hash) => {
+    return `https://blockchair.com/search?q=${hash}&submitButton=`
+}
+
+
+
 export const etherscanUrlTrans = (network,hash) => {
     return `https://${network}.etherscan.io/tx/${hash}`
 }

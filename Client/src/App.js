@@ -9,6 +9,9 @@ import NewCreated from './components/newCreated'
 import NewTransaction from './components/newTransaction'
 import ConfirmTransaction from './components/confirmTransaction'
 import Password from './components/password'
+import BTCNewTransaction from './components/BTCNewTransaction'
+import DOGENewTransaction from './components/DOGENewTransaction'
+
 //import {BackgroundWorker} from './utils/backgroundWorker'
 
 function App() {
@@ -17,7 +20,9 @@ function App() {
     'new': <CreateNew />,
     'created': <NewCreated />,
     'dashboard':<Dashboard />,
-    'transaction':<NewTransaction/>,
+    'ETCtransaction':<NewTransaction/>,
+    'BTCtransaction':<BTCNewTransaction/>,
+    'DOGEtransaction':<DOGENewTransaction/>,
     'confirm':<ConfirmTransaction/>,
     'password': <Password/>
   }
