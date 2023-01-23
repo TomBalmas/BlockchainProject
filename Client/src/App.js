@@ -33,7 +33,7 @@ function App() {
   return (
     <UserContext.Provider value={{state, dispatch}}>
     <div className="App container">
-        <h1>ETR BTC DOG Wallet</h1>
+        <h1>ETR BTC DOGE Wallet</h1>
           {pages[state.page]}
     </div>
     </UserContext.Provider>
