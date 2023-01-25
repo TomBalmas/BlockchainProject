@@ -1,5 +1,6 @@
 import * as Acc from './walletEthers.js'
-
+import * as Bcc from './walletBTC.js'
+import * as Dcc from './walletDOGE.js'
 
 
 
@@ -22,6 +23,9 @@ export const initState = {
     accessBy: 0,    // 0 - password, 1 - private key, 2 - seed words
     name: '',
     address: '',    // account name
+    BTCaddress: '',
+    DOGEaddress: '',
+    hdWallet: '',
     privateKey: '',
     password: '',
     mnemonic: '',
@@ -52,15 +56,21 @@ export const reducer = (state, action) => {
             }
         case 'NEW_WALLET':
             const wallet = Acc.createNewWallet()
+            const hdWallet = Bcc.getNewHdWallet()
+            const btc_address = Bcc.getAddress(hdWallet)
+            const doge_address = Dcc.getAddress(hdWallet)
             const key = action.param.name
             const password = action.param.password
-            const text = JSON.stringify({ privateKey: wallet.privateKey, address: wallet.address, name: key })
+            const text = JSON.stringify({ privateKey: wallet.privateKey, address: wallet.address, name: key,BTCaddress:btc_address , DOGEaddress: doge_address, hdWallet:hdWallet})
             const enc = Acc.encWallet(text, password)
             localStorage[key] = enc
             return {
                 ...state,
                 name: key,
                 address: wallet.address,
+                BTCaddress: btc_address,
+                DOGEaddress: doge_address,
+                hdWallet: hdWallet,
                 privateKey: wallet.privateKey,
                 mnemonic: wallet.mnemonic.phrase,
                 page: 'created'
@@ -69,6 +79,7 @@ export const reducer = (state, action) => {
             let ewallet, edec, etext, eenc, err
             const epassword = action.param.password
             const ekey = action.param.name
+             
             if (state.accessBy === 0) {
                 try {
                     edec = localStorage[ekey]
@@ -116,6 +127,8 @@ export const reducer = (state, action) => {
                 ...state,
                 name: ekey,
                 address: ewallet.address,
+                BTCaddress: ewallet.BTCaddress,
+                DOGEaddress: ewallet.DOGEaddress,
                 privateKey: ewallet.privateKey,
                 mnemonic: '',
                 page: 'dashboard'

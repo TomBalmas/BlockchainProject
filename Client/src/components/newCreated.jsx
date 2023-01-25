@@ -14,8 +14,16 @@ export default function NewCreated() {
                 <div className="float-left font-bold">{state.mnemonic}</div>
             </RowItemSingle>
             <RowItemSingle>
-                <div className="float-left mr-10">Address: </div>
+                <div className="float-left mr-10">ETC Address: </div>
                 <div className="float-left font-bold">{state.address}</div>
+            </RowItemSingle>
+            <RowItemSingle>
+                <div className="float-left mr-10">BTC Address: </div>
+                <div className="float-left font-bold">{state.BTCaddress}</div>
+            </RowItemSingle>
+            <RowItemSingle>
+                <div className="float-left mr-10">DOGE Address: </div>
+                <div className="float-left font-bold">{state.DOGEaddress}</div>
             </RowItemSingle>
             <RowItemSingle>
                 <div className="float-left mr-10">Private Key: </div>

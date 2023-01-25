@@ -45,13 +45,13 @@ export default function Password() {
                 <input type="text" placeholder="enter the seed words" name="mnemonic" required={state.accessBy===2}/>
             </RowItemSingle>
             <RowItemCustom>
+            <div className={'column column-50'}> 
+                    <legend>Account name</legend>
+                    <input type="text" placeholder="enter a nick name for this account" name="name" required/>
+                </div>
                 <div className="column column-50">
                     <legend>Account password</legend>
                     <input type="password" placeholder="enter the password" name="password" required/>
-                </div>
-                <div className={'column column-50'}> 
-                    <legend>Account name</legend>
-                    <input type="text" placeholder="enter a nick name for this account" name="name" required/>
                 </div>
             </RowItemCustom>
             <RowItemSingle cl="mt-10">
