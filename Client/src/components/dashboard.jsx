@@ -6,7 +6,7 @@ import UserContext from '../utils/walletContext.js'
 import Transactions from './transactions'
 import * as Lib from '../utils/lib'
 import { getBalance, getPrice, getTransactions } from '../utils/backgroundWorker'
-import{bitcoinAddress,checkBalance,checkBTCPrice} from '../utils/walletBTC.js'
+import{bitcoinAddress,checkBalance,getBtcPrice} from '../utils/walletBTC.js'
 import{dogecoinAddress,checkDODGEPrice, checkDOGEBalance} from '../utils/walletDOGE.js'
 export default function Dashboard() {
     const { state, dispatch } = useContext(UserContext)
@@ -14,45 +14,52 @@ export default function Dashboard() {
     const [dogBalance, setDOGBalance] = useState(""); 
     const [btcPrice, setPrice] = useState(""); 
     const [DogePrice, DogesetPrice] = useState(""); 
+    
 
     //check BTC balance
     const promise = new Promise((resolve, reject) => {
-        resolve( checkBalance() )
-      })
-      
-      promise.then((response) => {
+        resolve( checkBalance() )  })
+        promise.then((response) => {
         setBTCBalance(response)
       })
-      //check DODGE BALANCE
-      const dodgeBalance = new Promise((resolve, reject) => {
-        resolve( checkDOGEBalance() )
+    //get current BTC price in USD
+    async function getbtcPrice() {
+    try { 
+        const promise = new Promise((resolve, reject) => {
+        resolve(getBtcPrice() )
+        })  
+        promise.then((response) => {
+        setPrice(response)
       })
-      
-      dodgeBalance.then((response) => {
+      } catch (error) {} 
+  }
+  //gru DOGE price in USD
+  async function getDOGEPrice() {
+    try { 
+        const promise = new Promise((resolve, reject) => {
+        resolve(checkDODGEPrice() )  })  
+        promise.then((response) => {
+            DogesetPrice(response)
+        })
+      } catch (error) {} 
+    }
+    async function getDOGEBalance() {
+    try { 
+        const promise = new Promise((resolve, reject) => {
+        resolve(checkDOGEBalance() )
+        })  
+        promise.then((response) => {
         setDOGBalance(response)
-      })
-      //NOT WORKING-DODGE CURRENT PRICE
-    //   const dodgePrice = new Promise((resolve, reject) => {
-    //     resolve( checkDODGEPrice() )
-    //   })
-      
-    //   dodgeBalance.then((response) => {
-    //     DogesetPrice(response)
-    //   })
-      //no
-      //not working
-    //   const checkPrice = new Promise((resolve, reject) => {
-    //    // resolve( checkBTCPrice() )
-    //   })
-      
-    //   promise.then((response) => {
-    //    // setPrice(response)
-    //   })
+        })
+        } catch (error) {} 
+    }
     useEffect(() => {
+        getbtcPrice()
+        getDOGEPrice()
+        getDOGEBalance()
         getBalance(state, dispatch)
         getPrice(state, dispatch)
-        getTransactions(state, dispatch)
-       
+        getTransactions(state, dispatch)   
         // TBD - tracking balance, price and transactions updates
     }, [])
 
@@ -114,7 +121,10 @@ export default function Dashboard() {
             </RowItemSingle>
             <RowItemSingle>
                 <div className="float-left mr-10">BTC Price: </div>
-                <div className="float-left font-bold text-primary mr-10">{btcPrice}</div>
+                <div className="float-left font-bold text-primary mr-10">{btcPrice.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                })}</div>
                 {/* <div className="float-left">USD</div> */}
             </RowItemSingle>
             <RowItemSingle>

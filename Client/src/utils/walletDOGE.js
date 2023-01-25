@@ -19,14 +19,11 @@ export function sendDoge(toAddress,amount){
 
 
 export async function checkDODGEPrice() {
-    try {
-        const response = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd');
-        const price = response.data.dogecoin.usd;
-        console.log(price);
-        return price;
-    } catch (error) {
-        console.error(error);
-    }
+    const url = `https://api.binance.com/api/v3/avgPrice?symbol=DOGEUSDT`
+    const response = await fetch(url)
+    //console.log(response)
+    const d = await response.json()
+    return parseFloat(d["price"]).toFixed(2)
 }
 
 export async function checkDOGEBalance() { 
@@ -36,6 +33,5 @@ export async function checkDOGEBalance() {
     // Sum up the value of the UTXOs to get the balance
     const balance = res['balance'];
     bal = balance;
-    console.log(balance);
     return bal;
 }

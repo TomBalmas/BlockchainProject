@@ -12,24 +12,20 @@ const bitcoinPubKey = bitcoinHdWallet.publicKey;
 export const bitcoinAddress = bitcoin.payments.p2pkh({ pubkey: bitcoinPubKey }).address;
 
 
-export async function checkBTCPrice() {
-    try {
-        const response = await axios.get('https://coincap.io/page/BTC');
-        const price = response.data.price;
-        console.log(price);
-    } catch (error) {
-        console.error(error);
-    }
-}
 
-
+export const getBtcPrice = async (coin='bitcoin') => {
+    const url = `https://api.binance.com/api/v3/avgPrice?symbol=BTCUSDT`
+    const response = await fetch(url)
+    //console.log(response)
+    const d = await response.json()
+    return parseFloat(d["price"]).toFixed(2)
+} 
 export async function checkBalance() { 
     var bal;
     const response = await axios.get(`https://blockchain.info/balance?active=${bitcoinAddress}`);
     const res = response.data;
     const balance = res[bitcoinAddress]['final_balance'];
     // Sum up the value of the UTXOs to get the balance
-    console.log(balance);
     bal = balance;
     return bal;
 }
