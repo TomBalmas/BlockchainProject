@@ -96,23 +96,18 @@ export default function Dashboard() {
             </RowItemSingle>
             <RowItemSingle cl="mt-10">
                 <button className='button mr-10' onClick={() => dispatch({ type: 'PAGE', param: 'ETCtransaction' })}>New Transaction</button>
-                <button className='button' onClick={() => dispatch({ type: 'PAGE', param: 'home' })}>Exit Wallet</button>
                 <span className='text-danger ml-20'>{state.error.msg}</span>
             </RowItemSingle>
             <RowItemSingle>
-                <legend>Last transactions</legend>
-                <Transactions />
-            </RowItemSingle>
-            <RowItemSingle>
                 <div><a href={Lib.etherscanUrlAcc(state.network, state.address)}
-                    rel="noopener noreferrer" target='_blank'>See the account in block explorer</a></div>
+                    rel="noopener noreferrer" target='_blank'>See the Etherium account in block explorer</a></div>
             </RowItemSingle>
             <div class="header">
             <h1>Bitcoin :</h1>
             </div>
             <RowItemSingle>
                 <div className="float-left mr-10">Address: </div>
-                <div className="float-left font-bold text-primary">{bitcoinAddress}</div>
+                <div className="float-left font-bold text-primary">{state.BTCaddress}</div>
             </RowItemSingle>
             <RowItemSingle>
                 <div className="float-left mr-10">Balance: </div>
@@ -137,23 +132,18 @@ export default function Dashboard() {
             </RowItemSingle>
             <RowItemSingle cl="mt-10">
                 <button className='button mr-10' onClick={() => dispatch({ type: 'PAGE', param: 'BTCtransaction' })}>New Transaction</button>
-                <button className='button' onClick={() => dispatch({ type: 'PAGE', param: 'home' })}>Exit Wallet</button>
                 <span className='text-danger ml-20'>{state.error.msg}</span>
             </RowItemSingle>
             <RowItemSingle>
-                <legend>Last transactions</legend>
-                <Transactions />
-            </RowItemSingle>
-            <RowItemSingle>
-                <div><a href={Lib.btcscanUrlAcc( bitcoinAddress)}
-                    rel="noopener noreferrer" target='_blank'>See the account in block explorer</a></div>
+                <div><a href={Lib.btcscanUrlAcc( state.BTCaddress)}
+                    rel="noopener noreferrer" target='_blank'>See the Bitcoin account in block explorer</a></div>
             </RowItemSingle>
             <div class="header">
             <h1>Dodgecoin :</h1>
             </div>
             <RowItemSingle>
                 <div className="float-left mr-10">Address: </div>
-                <div className="float-left font-bold text-primary">{dogecoinAddress}</div>
+                <div className="float-left font-bold text-primary">{state.DOGEaddress}</div>
             </RowItemSingle>
             <RowItemSingle>
                 <div className="float-left mr-10">Balance: </div>
@@ -178,7 +168,6 @@ export default function Dashboard() {
             </RowItemSingle>
             <RowItemSingle cl="mt-10">
                 <button className='button mr-10' onClick={() => dispatch({ type: 'PAGE', param: 'DOGEtransaction' })}>New Transaction</button>
-                <button className='button' onClick={() => dispatch({ type: 'PAGE', param: 'home' })}>Exit Wallet</button>
                 <span className='text-danger ml-20'>{state.error.msg}</span>
             </RowItemSingle>
             <RowItemSingle>
@@ -186,8 +175,11 @@ export default function Dashboard() {
                 <Transactions />
             </RowItemSingle>
             <RowItemSingle>
-                <div><a href={Lib.dogescanUrlAcc(dogecoinAddress)}
-                    rel="noopener noreferrer" target='_blank'>See the account in block explorer</a></div>
+                <div><a href={Lib.dogescanUrlAcc(state.DOGEaddress)}
+                    rel="noopener noreferrer" target='_blank'>See the DOGE-Coin account in block explorer</a></div>
+            </RowItemSingle>
+            <RowItemSingle>
+                <button className='button' onClick={() => dispatch({ type: 'PAGE', param: 'home' })}>Exit Wallet</button>
             </RowItemSingle>
         </PageContent>
     )
