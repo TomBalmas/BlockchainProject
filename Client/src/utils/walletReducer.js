@@ -153,7 +153,19 @@ export const reducer = (state, action) => {
                 ...state,
                 page: 'confirm',
                 newTransaction: action.param
-            }       
+            }
+        case 'SET_NEW_TRANSACTION_BTC':
+            return {
+                ...state,
+                page: 'confirmBTC',
+                newTransaction: action.param
+            }
+        case 'SET_NEW_TRANSACTION_DOGE':
+            return {
+                ...state,
+                page: 'confirmDOGE',
+                newTransaction: action.param
+            }                      
         case 'NEW_TRANSACTION_CLEAR':
             return {
                 ...state,

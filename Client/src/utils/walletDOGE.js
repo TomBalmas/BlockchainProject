@@ -16,11 +16,12 @@ export function getAddress(hdWallet) {
 
 
 
-export function sendDoge(toAddress,amount,fromAddress,hdWallet){
+export function sendDoge(toAddress,amount,hdWallet){
     const dogecoinHdPath = "m/44'/3'/0'";
     const dogecoinHdWallet = hdWallet.derive(dogecoinHdPath);
     const privateKey = new dogecore.PrivateKey.fromWIF(dogecore.PrivateKey.fromBuffer(dogecoinHdWallet.privateKey).toString());
-    const transcaion = new dogecore.Transaction().from(fromAddress).to(toAddress, amount).sign(privateKey);
+    const address = getAddress(hdWallet)
+    const transcaion = new dogecore.Transaction().from(address).to(toAddress, amount).sign(privateKey);
     return transcaion;
 
 }
@@ -36,10 +37,18 @@ export async function checkDODGEPrice() {
 
 export async function checkDOGEBalance(address) { 
     var bal;
-    const response = await axios.get('https://dogechain.info//api/v1/address/balance/' + address);
-    const res = response.data;
-    // Sum up the value of the UTXOs to get the balance
-    const balance = res['balance'];
-    bal = balance;
+    try {
+        const response = await axios.get('https://dogechain.info//api/v1/address/balance/' + address);
+        const res = response.data;
+        // Sum up the value of the UTXOs to get the balance
+        const balance = res['balance'];
+        bal = balance;
+    } catch (error) {
+          console.log(error)  
+    }
     return bal;
+}
+
+export async function transactionFeeDOGE(){
+
 }

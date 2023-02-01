@@ -15,7 +15,7 @@ export default function DOGENewTransaction() {
     const validateAndExecute = (e) => {
         e.preventDefault()       
         if(e.target.amount.value < state.balance){
-            dispatch({type: 'SET_NEW_TRANSACTION',param:{recepient: e.target.recepient.value, amount: e.target.amount.value }})
+            dispatch({type: 'SET_NEW_TRANSACTION_DOGE',param:{recepient: e.target.recepient.value, amount: e.target.amount.value, coinSymbol:'DOGE',coinName:'dogecoin'  }})
         }else{
             dispatch({ type: 'SET_ERROR', param: 'amount can\'t exceed the balance' })
         }        

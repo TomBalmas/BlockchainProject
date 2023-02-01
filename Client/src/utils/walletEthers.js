@@ -76,7 +76,7 @@ export const sendTransaction = async (network, privatekey, recepient, value) => 
     return trh
 }
 
-export const transactionFee = async (network) => {
+export const transactionFeeEther = async (network) => {
     const provider = getProvider(network)
     const feeData = await provider.getFeeData()
     const limit = 21000

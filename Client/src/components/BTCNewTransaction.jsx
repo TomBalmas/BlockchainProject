@@ -3,6 +3,8 @@ import RowItemSingle from './rowItemSingle'
 import RowItemCustom from './rowItemCustom'
 import PageContent from './pageContent'
 import UserContext from '../utils/walletContext.js'
+const bitcoin = require('bitcoinjs-lib');
+const network = bitcoin.networks.testnet;
 
 export default function BTCNewTransaction() {
     const { state,dispatch } = useContext(UserContext)
@@ -15,7 +17,7 @@ export default function BTCNewTransaction() {
     const validateAndExecute = (e) => {
         e.preventDefault()       
         if(e.target.amount.value < state.balance){
-            dispatch({type: 'SET_NEW_TRANSACTION',param:{recepient: e.target.recepient.value, amount: e.target.amount.value }})
+            dispatch({type: 'SET_NEW_TRANSACTION_BTC',param:{recepient: e.target.recepient.value, amount: e.target.amount.value, coinSymbol:'BTC',coinName:'bitcoin'}})
         }else{
             dispatch({ type: 'SET_ERROR', param: 'amount can\'t exceed the balance' })
         }        

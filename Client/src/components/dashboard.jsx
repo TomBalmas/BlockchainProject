@@ -17,11 +17,15 @@ export default function Dashboard() {
     
 
     //check BTC balance
-    const promise = new Promise((resolve, reject) => {
-        resolve( checkBalance() )  })
-        promise.then((response) => {
-        setBTCBalance(response)
-      })
+    async function getBTCBalance(){
+        try{
+        const promise = new Promise((resolve, reject) => {
+            resolve( checkBalance(state.BTCaddress) )  })
+            promise.then((response) => {
+            setBTCBalance(response)
+        })
+        } catch (error) {} 
+    }
     //get current BTC price in USD
     async function getbtcPrice() {
     try { 
@@ -46,7 +50,7 @@ export default function Dashboard() {
     async function getDOGEBalance() {
     try { 
         const promise = new Promise((resolve, reject) => {
-        resolve(checkDOGEBalance() )
+        resolve(checkDOGEBalance(state.DOGEaddress) )
         })  
         promise.then((response) => {
         setDOGBalance(response)
@@ -54,6 +58,7 @@ export default function Dashboard() {
         } catch (error) {} 
     }
     useEffect(() => {
+        getBTCBalance()
         getbtcPrice()
         getDOGEPrice()
         getDOGEBalance()

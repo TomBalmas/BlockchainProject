@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.3",
     "bip39": "^3.0.4",
+    "bitcoin-transaction": "^1.2.1",
     "bitcoinjs-lib": "^6.1.0",
     "dogecore": "^0.15.0",
     "dogecore-lib": "^0.14.0",

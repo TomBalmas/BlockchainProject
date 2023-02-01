@@ -7,7 +7,9 @@ import Dashboard from './components/dashboard'
 import Home from './components/home'
 import NewCreated from './components/newCreated'
 import NewTransaction from './components/newTransaction'
+import ConfirmTransactionDOGE from './components/confirmTransactionDOGE'
 import ConfirmTransaction from './components/confirmTransaction'
+import ConfirmTransactionBTC from './components/confirmTransactionBTC'
 import Password from './components/password'
 import BTCNewTransaction from './components/BTCNewTransaction'
 import DOGENewTransaction from './components/DOGENewTransaction'
@@ -24,6 +26,8 @@ function App() {
     'BTCtransaction':<BTCNewTransaction/>,
     'DOGEtransaction':<DOGENewTransaction/>,
     'confirm':<ConfirmTransaction/>,
+    'confirmDOGE':<ConfirmTransactionDOGE/>,
+    'confirmBTC':<ConfirmTransactionBTC/>,
     'password': <Password/>
   }
 
