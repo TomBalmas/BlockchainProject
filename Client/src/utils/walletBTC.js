@@ -13,9 +13,12 @@ export function getAddress(hdWallet) {
 }
 
 
-export function getNewHdWallet(){
-    var seed = Seed.new();
-    return hdkey.fromMasterSeed(seed.buffer);
+export function getNewSeed() { 
+     return Seed.new().buffer;
+}
+export function getNewHdWallet(seed){
+    
+    return hdkey.fromMasterSeed(seed);
 }
 
 export const getBtcPrice = async (coin='bitcoin') => {

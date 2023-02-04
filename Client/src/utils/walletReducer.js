@@ -25,7 +25,7 @@ export const initState = {
     address: '',    // account name
     BTCaddress: '',
     DOGEaddress: '',
-    hdWallet: '',
+    hdSeed: '',
     privateKey: '',
     password: '',
     mnemonic: '',
@@ -56,12 +56,13 @@ export const reducer = (state, action) => {
             }
         case 'NEW_WALLET':
             const wallet = Acc.createNewWallet()
-            const hdWallet = Bcc.getNewHdWallet()
+            const seed = Bcc.getNewSeed()
+            const hdWallet = Bcc.getNewHdWallet(seed)
             const btc_address = Bcc.getAddress(hdWallet)
             const doge_address = Dcc.getAddress(hdWallet)
             const key = action.param.name
             const password = action.param.password
-            const text = JSON.stringify({ privateKey: wallet.privateKey, address: wallet.address, name: key,BTCaddress:btc_address , DOGEaddress: doge_address, hdWallet:hdWallet})
+            const text = JSON.stringify({ privateKey: wallet.privateKey, address: wallet.address, name: key,BTCaddress:btc_address , DOGEaddress: doge_address, hdSeed:seed})
             const enc = Acc.encWallet(text, password)
             localStorage[key] = enc
             return {
@@ -70,7 +71,7 @@ export const reducer = (state, action) => {
                 address: wallet.address,
                 BTCaddress: btc_address,
                 DOGEaddress: doge_address,
-                hdWallet: hdWallet,
+                hdSeed: seed,
                 privateKey: wallet.privateKey,
                 mnemonic: wallet.mnemonic.phrase,
                 page: 'created'
@@ -130,6 +131,7 @@ export const reducer = (state, action) => {
                 BTCaddress: ewallet.BTCaddress,
                 DOGEaddress: ewallet.DOGEaddress,
                 privateKey: ewallet.privateKey,
+                hdSeed: ewallet.hdSeed,
                 mnemonic: '',
                 page: 'dashboard'
             }
