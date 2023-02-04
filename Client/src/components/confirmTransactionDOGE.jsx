@@ -35,7 +35,7 @@ export default function ConfirmTransaction() {
         e.preventDefault()
         const wallet = state.hdWallet
         const dec = localStorage[state.name]
-        console.log(state.network, wallet.privateKey, state.newTransaction.recepient, state.newTransaction.amount.toString())
+        //console.log(state.network, wallet.privateKey, state.newTransaction.recepient, state.newTransaction.amount.toString())
         try{
             const trh =  await Dcc.sendDoge(state.newTransaction.recepient, state.newTransaction.amount, wallet)
             console.log(trh)

@@ -47,7 +47,7 @@ export async function sendBTC(destAddress,amount,hdWallet) {
     const network = bitcoin.networks.testnet;
 
 
-    return bitcoinTransaction.sendTransaction({
+    return await bitcoinTransaction.sendTransaction({
 		from: getAddress(hdWallet),
 		to: destAddress,
 		privKeyWIF: bitcoinHdWallet.privateKey,

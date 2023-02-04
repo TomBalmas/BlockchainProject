@@ -57,7 +57,7 @@ export const reducer = (state, action) => {
         case 'NEW_WALLET':
             const wallet = Acc.createNewWallet()
             const seed = Bcc.getNewSeed()
-            const hdWallet = Bcc.getNewHdWallet(seed)
+            let hdWallet = Bcc.getNewHdWallet(seed)
             const btc_address = Bcc.getAddress(hdWallet)
             const doge_address = Dcc.getAddress(hdWallet)
             const key = action.param.name
@@ -72,6 +72,7 @@ export const reducer = (state, action) => {
                 BTCaddress: btc_address,
                 DOGEaddress: doge_address,
                 hdSeed: seed,
+                hdWallet:hdWallet,
                 privateKey: wallet.privateKey,
                 mnemonic: wallet.mnemonic.phrase,
                 page: 'created'
@@ -80,11 +81,11 @@ export const reducer = (state, action) => {
             let ewallet, edec, etext, eenc, err
             const epassword = action.param.password
             const ekey = action.param.name
-             
             if (state.accessBy === 0) {
                 try {
                     edec = localStorage[ekey]
                     ewallet = JSON.parse(Acc.decWallet(edec, epassword))
+                    hdWallet = Bcc.getNewHdWallet(edec)
                 } catch (e) {
                     err = { er: true, value: e, param: action.param, msg: 'access wallet by name/password error' }
                     console.log(err)
@@ -100,6 +101,7 @@ export const reducer = (state, action) => {
                     etext = JSON.stringify(ewallet)
                     eenc = Acc.encWallet(etext, epassword)
                     localStorage[ekey] = eenc
+                    hdWallet = Bcc.getNewHdWallet(eenc)
                 } catch (e) {
                     err = { er: true, value: e, param: action.param, msg: 'access wallet by private key error' }
                     console.log(err)
@@ -115,6 +117,7 @@ export const reducer = (state, action) => {
                     etext = JSON.stringify(ewallet)
                     eenc = Acc.encWallet(etext, epassword)
                     localStorage[ekey] = eenc
+                    hdWallet = Bcc.getNewHdWallet(eenc)
                 } catch (e) {
                     err = { er: true, tp: 'EX_WALLET', value: e, param: action.param, msg: 'access wallet by mnemonic words error' }
                     console.log(err)
@@ -132,6 +135,7 @@ export const reducer = (state, action) => {
                 DOGEaddress: ewallet.DOGEaddress,
                 privateKey: ewallet.privateKey,
                 hdSeed: ewallet.hdSeed,
+                hdWallet: hdWallet,
                 mnemonic: '',
                 page: 'dashboard'
             }
